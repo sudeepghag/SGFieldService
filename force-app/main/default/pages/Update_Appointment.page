@@ -1,0 +1,5 @@
+<apex:page standardController="ServiceAppointment">
+    Hello {!$User.FirstName}!
+    <p>You are viewing the Appointment# {!ServiceAppointment.AppointmentNumber}</p>
+    <p>Subject: {!ServiceAppointment.Subject}</p>
+</apex:page>

@@ -1,0 +1,78 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="WorkOrderId" type="String" />
+
+    <aura:attribute name="TSE_Type_Options" type="List" default="[
+    {'label': 'Direct', 'value': 'Direct'},
+    {'label': 'Indirect', 'value': 'Indirect'}
+    ]"/>
+    <aura:attribute name="TSE_Type_value" type="String" default="Direct"/>
+
+    <aura:attribute name="TSE_Status_Options" type="List" default="[
+    {'label': 'New', 'value': 'New'},
+    {'label': 'Submitted', 'value': 'Submitted'},
+    {'label': 'Approved', 'value': 'Approved'}
+    ]"/>
+    <aura:attribute name="TSE_Status_value" type="String" default="New"/>
+        
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+
+    <aura:if isTrue="{!!v.saved}">
+        <lightning:recordEditForm
+        onload="{!c.handleLoad}"
+        onsubmit="{!c.handleSubmit}"
+        onsuccess="{!c.handleSuccess}"
+        objectApiName="TimeSheetEntry">
+
+        <lightning:messages />
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                    <lightning:inputField fieldName="Subject" />
+                    <div class="slds-hide">
+                        <lightning:inputField aura:id="type" fieldName="Type"/>
+                    </div>
+                    <lightning:radioGroup name="TSE_Type_radioButtonGroup"
+                    label="Type"
+                    options="{! v.TSE_Type_Options }"
+                    value="{! v.TSE_Type_value }"
+                    onchange="{!c.onTypeChange}"
+                    type="button"/>
+                    <lightning:inputField aura:id="startdate" fieldName="StartTime" onchange="{!c.StartDateChange}"/>
+                    <div class="slds-hide">
+                        <lightning:inputField fieldName="WorkOrderId" value="{!v.WorkOrderId}" disabled="true"/>
+                    </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                    <lightning:inputField fieldName="TimeSheetId" />
+                    <div class="slds-hide">
+                        <lightning:inputField aura:id="status" fieldName="Status"/>
+                    </div>
+                    <lightning:radioGroup name="TSE_Status_radioButtonGroup"
+                    label="Status"
+                    options="{! v.TSE_Status_Options }"
+                    value="{! v.TSE_Status_value }"
+                    onchange="{!c.onStatusChange}"
+                    type="button"/>                    
+                    <lightning:inputField aura:id="enddate" fieldName="EndTime" />
+            </div>
+        </div>
+        
+        <div class="slds-m-top_medium">
+            <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+        </div>
+
+        </lightning:recordEditForm>
+
+        <aura:set attribute="else">
+            <p>Saved! New record id is {!v.recordId}</p>
+        </aura:set>
+    </aura:if>
+
+
+</aura:component>

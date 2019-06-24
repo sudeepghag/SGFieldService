@@ -1,0 +1,7 @@
+<apex:page standardController="ServiceAppointment">
+    
+    <apex:form >
+        <apex:inputField value="{!ServiceAppointment.Status}"/> <p/>
+        <apex:commandButton value="Save" action="{!save}"/>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,55 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+
+    <aura:attribute name="TSES" type="TimeSheetEntry[]" />
+    <aura:attribute name="TSE_Type_Options" type="List" default="[
+    {'label': 'Direct', 'value': 'Direct'},
+    {'label': 'Indirect', 'value': 'Indirect'}
+    ]"/>
+    <aura:attribute name="TSE_Type_value" type="String" default="Direct"/>
+
+    <aura:attribute name="TSE_Status_Options" type="List" default="[
+    {'label': 'New', 'value': 'New'},
+    {'label': 'Submitted', 'value': 'Submitted'},
+    {'label': 'Approved', 'value': 'Approved'}
+    ]"/>
+    <aura:attribute name="TSE_Status_value" type="String" default="New"/>
+
+    <form class="slds-form--stacked slds-p-around_x-small">          
+
+            <div class="row">
+                <h2 class="header">Time Sheet Entry</h2>
+                <lightning:input name="TSE_Subject" label="Subject" placeholder="type here..."/>
+                <lightning:radioGroup name="TSE_Type_radioButtonGroup"
+                label="Type"
+                options="{! v.TSE_Type_Options }"
+                value="{! v.TSE_Type_value }"
+                type="button"/>
+                <lightning:radioGroup name="TSE_Status_radioButtonGroup"
+                label="Status"
+                options="{! v.TSE_Status_Options }"
+                value="{! v.TSE_Status_value }"
+                type="button"/>
+                <lightning:input type="datetime" name="TSE_startdt" label="Start Date Time" value="2019-06-21T08:00:00Z"/>
+                <lightning:input type="datetime" name="TSE_enddt" label="End Date Time" value="2019-06-21T10:00:00Z"/>
+            </div>
+    
+            <lightning:buttonGroup>
+                <lightning:button label="Direct" iconName="utility:travel_and_places" onclick="{! c.handleClick }"/>
+                <lightning:button label="Indirect" iconName="utility:work_order_type" onclick="{! c.handleClick }"/>
+            </lightning:buttonGroup>
+        <lightning:button name="notice" label="Show Notice" onclick="{!c.handleShowNotice}"/>
+        <lightning:button name="showall" label="Show All" onclick="{!c.gotoRelatedList}"/>
+        <lightning:button name="gotoparenttimesheet" label="Show Time Sheet" onclick="{!c.gotoParentTimeSheetRecord}"/>
+
+
+    </form>
+    
+
+
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">{!v.recordError}</div>
+    </aura:if>    
+
+    <lightning:notificationsLibrary aura:id="notifLib"/> 
+
+</aura:component>

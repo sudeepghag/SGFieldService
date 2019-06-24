@@ -1,0 +1,25 @@
+<apex:component access="global">
+
+<apex:attribute name="obj" description="The type of record we are viewing." type="Account"/>
+
+
+  <h1>Account Details</h1>
+  
+  <apex:panelGrid columns="2">
+
+      <apex:outputLabel for="Name" value="Name"/>
+      <apex:outputText id="Name" value="{!obj.Name}"/>
+      
+      <apex:outputLabel for="BillingCountry" value="BillingCountry"/>
+      <apex:outputText id="BillingCountry" value="{!obj.BillingCountry}"/>
+      
+      <apex:outputLabel for="AnnualRevenue" value="Annual Revenue"/>
+      <apex:outputText id="AnnualRevenue" value="{0,number,currency}">
+          <apex:param value="{!obj.AnnualRevenue}"/>
+      </apex:outputText>
+      
+      <apex:outputLabel for="NumberOfEmployees" value="Employees"/>
+      <apex:outputText id="NumberOfEmployees" value="{!obj.NumberOfEmployees}"/>
+      
+  </apex:panelGrid>
+</apex:component>

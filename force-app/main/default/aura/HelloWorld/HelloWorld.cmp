@@ -1,0 +1,5 @@
+<aura:component implements="force:lightningQuickAction" >
+    <div class="container">
+        <!--Other HTML tags or components here-->
+    </div>
+</aura:component>

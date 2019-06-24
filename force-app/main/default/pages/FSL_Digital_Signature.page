@@ -1,0 +1,10 @@
+<apex:page standardController="DigitalSignature">
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Digital Signature</h1>
+  <apex:pageBlock title="Block - Digital Signature">
+  <apex:pageBlockSection title="Block Section - Digital Signature">
+   
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page standardController="WorkOrder">
+    Hello {!$User.FirstName}!
+    <p>You are viewing the WorkOrder# {!WorkOrder.WorkOrderNumber}</p>
+    <p>Subject: {!WorkOrder.Subject}</p>
+</apex:page>
